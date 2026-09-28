@@ -33,6 +33,9 @@ jobs:
           - aarch64-unknown-linux-musl
           - armv7-unknown-linux-musleabihf
           - x86_64-pc-windows-gnu
+        profile:
+          - release
+          - debug
     steps:
       - uses: actions/checkout@v4
       
@@ -65,8 +68,13 @@ jobs:
         id: version
         run: echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
 
-      - name: Build
+      - name: Build release
+        if: matrix.profile == 'release'
         run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Build debug
+        if: matrix.profile == 'debug'
+        run: cargo build  --target ${{ matrix.target }}
 
       - name: Package release
         shell: bash
