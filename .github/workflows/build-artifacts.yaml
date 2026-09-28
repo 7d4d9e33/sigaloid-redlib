@@ -94,16 +94,11 @@ jobs:
             tar czf redlib-${{ matrix.target }}.tar.gz -C target/${{ matrix.target }}/debug/ redlib
           fi
 
-      - name: Upload release
-        uses: softprops/action-gh-release@v1
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ steps.version.outputs.VERSION }}
-          name: ${{ steps.version.outputs.VERSION }} - ${{ github.event.head_commit.message }}
-          draft: true
-          files: |
-            redlib-${{ matrix.target }}.tar.gz
-          body: |
-            - ${{ github.event.head_commit.message }} ${{ github.sha }}
-          generate_release_notes: true
-
-
+          name: redlib-${{ matrix.profile }}-${{ matrix.target }}
+          path: |
+            redlib-${{ matrix.profile }}-${{ matrix.target }}.tar.gz
+            redlib-${{ matrix.profile }}-${{ matrix.target }}.zip
+          if-no-files-found: error
