@@ -48,17 +48,17 @@ jobs:
       - if: matrix.target == 'x86_64-unknown-linux-musl'
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends musl-tools git cmake perl pkg-config libclang-dev
+          sudo apt-get install -y --no-install-recommends musl-tools g++-x86-64-linux-gnu gcc-x86-64-linux-gnu git cmake perl pkg-config libclang-dev
  
       - if: matrix.target == 'armv7-unknown-linux-musleabihf'
         run: |
           sudo apt update
-          sudo apt install -y gcc-arm-linux-gnueabihf musl-tools git cmake perl pkg-config libclang-dev
+          sudo apt install -y gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf gcc-arm-linux-gnueabihf musl-tools git cmake perl pkg-config libclang-dev
 
       - if: matrix.target == 'aarch64-unknown-linux-musl'
         run: |
           sudo apt update
-          sudo apt install -y gcc-aarch64-linux-gnu musl-tools git cmake perl pkg-config libclang-dev
+          sudo apt install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu gcc-aarch64-linux-gnu musl-tools git cmake perl pkg-config libclang-dev
 
       - if: matrix.target == 'x86_64-pc-windows-gnu'
         run: |
