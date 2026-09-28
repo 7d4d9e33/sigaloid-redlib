@@ -75,7 +75,7 @@ jobs:
 
           # boring-sys2 (wreq's library) needs mm_alloc.h on MinGW
           # -nobuiltininc flag added to workaround Ubuntu's llvm headers inclusion which causes failure when compiling
-          echo "BINDGEN_EXTRA_CLANG_ARGS=--target=x86_64-pc-windows-gnu -I$(x86_64-w64-mingw32-gcc -print-file-name=include) -nobuiltininc" >> "$GITHUB_ENV"
+          echo "BINDGEN_EXTRA_CLANG_ARGS=-I$(x86_64-w64-mingw32-gcc -print-file-name=include) -nobuiltininc" >> "$GITHUB_ENV"
 
       - name: Versions
         id: version
