@@ -15,18 +15,22 @@ env:
   CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER: x86_64-linux-gnu-gcc
   CC_x86_64-unknown-linux-musl: x86_64-linux-gnu-gcc
   CXX_x86_64-unknown-linux-musl: x86_64-linux-gnu-g++
+  AR_x86_64_unknown_linux_musl: x86_64-linux-gnu-ar
 
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER: aarch64-linux-gnu-gcc
   CC_aarch64_unknown_linux_musl: aarch64-linux-gnu-gcc
   CXX_aarch64_unknown_linux_musl: aarch64-linux-gnu-g++
+  AR_aarch64_unknown_linux_musl: aarch64-linux-gnu-ar
 
   CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_LINKER: arm-linux-gnueabihf-gcc
   CC_armv7_unknown_linux_musleabihf: arm-linux-gnueabihf-gcc
   CXX_armv7_unknown_linux_musleabihf: arm-linux-gnueabihf-g++
+  AR_armv7_unknown_linux_musleabihf: arm-linux-gnueabihf-ar
 
   CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER: x86_64-w64-mingw32-gcc
   CC_x86_64_pc_windows_gnu: x86_64-w64-mingw32-gcc
   CXX_x86_64_pc_windows_gnu: x86_64-w64-mingw32-g++
+  AR_x86_64_pc_windows_gnu: x86_64-w64-mingw32-ar
 
 jobs:
   build:
