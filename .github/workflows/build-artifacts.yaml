@@ -7,8 +7,6 @@ on:
       - "compose.*"
     branches:
       - "main"
-  release:
-    types: [published]
 
 env: 
   CARGO_TERM_COLOR: always
