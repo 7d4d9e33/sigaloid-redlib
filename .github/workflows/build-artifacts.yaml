@@ -85,6 +85,15 @@ jobs:
             tar czf redlib-${{ matrix.target }}.tar.gz -C target/${{ matrix.target }}/release/ redlib
           fi
 
+      - name: Package debug
+        shell: bash
+        run: |
+          if [[ "${{ matrix.target }}" == *windows* ]]; then
+            zip -9 -j "redlib-${{ matrix.target }}.zip" "target/${{ matrix.target }}/debug/redlib.exe"
+          else
+            tar czf redlib-${{ matrix.target }}.tar.gz -C target/${{ matrix.target }}/debug/ redlib
+          fi
+
       - name: Upload release
         uses: softprops/action-gh-release@v1
         with:
