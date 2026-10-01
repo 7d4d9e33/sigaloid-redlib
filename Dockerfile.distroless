@@ -18,6 +18,9 @@ RUN rustup target add ${COMPILE_TARGET}
 
 WORKDIR /redlib
 
+# display backtrace on build error
+ENV RUST_BACKTRACE=full
+
 # download (most) dependencies in their own layer
 COPY Cargo.lock Cargo.toml ./
 RUN mkdir src && echo "fn main() { panic!(\"why am i running?\") }" > src/main.rs
