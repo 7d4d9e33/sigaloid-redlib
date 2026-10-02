@@ -1,6 +1,7 @@
 name: Code Test
 
 env:
+  RUST_BACKTRACE: full
   CARGO_TERM_COLOR: always
   NEXTEST_RETRIES: 10
 

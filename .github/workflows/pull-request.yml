@@ -1,9 +1,5 @@
 name: Pull Request
 
-env:
-  CARGO_TERM_COLOR: always
-  NEXTEST_RETRIES: 10
-
 on:
   pull_request:
 
