@@ -1,4 +1,4 @@
-name: Build Redlib
+name: Build Artifact
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   build:
-    name: Build Redlib
+    name: Build Artifact
     runs-on: ubuntu-latest
     strategy:
       matrix:
