@@ -69,7 +69,7 @@ jobs:
       - name: Build Redlib
         uses: houseabsolute/actions-rust-cross@v1.0.8
         with:
-          - target: ${{ matrix.target }}
+          target: ${{ matrix.target }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
