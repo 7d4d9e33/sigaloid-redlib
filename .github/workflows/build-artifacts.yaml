@@ -60,6 +60,7 @@ jobs:
             target/${{ matrix.target }}/release/redlib.exe
           compression-level: 9
           if-no-files-found: error
+
   upload-version:
     name: Upload Version
     uses: ubuntu-slim
