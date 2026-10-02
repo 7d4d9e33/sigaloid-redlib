@@ -57,20 +57,13 @@ jobs:
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Package release
-        run: tar czf redlib-${{ matrix.target }}.tar.gz -C target/${{ matrix.target }}/release/ redlib
-
-      - name: Upload release
-        uses: softprops/action-gh-release@v1
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7
         with:
-          tag_name: ${{ steps.version.outputs.VERSION }}
-          name: ${{ steps.version.outputs.VERSION }} - ${{ github.event.head_commit.message }}
-          draft: true
-          files: |
-            redlib-${{ matrix.target }}.tar.gz
-          body: |
-            - ${{ github.event.head_commit.message }} ${{ github.sha }}
-          generate_release_notes: true
+          name: redlib-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/redlib
+          compression-level: 9
+          if-no-files-found: error
 
 
 
