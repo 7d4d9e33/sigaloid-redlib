@@ -19,7 +19,7 @@ pre-build = [
   "rm -rf /var/cache/apt/*"
 ]
 
-[target.aarch64-pc-windows-gnu]
+[target.x86_64-pc-windows-gnu]
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 libc6-dev-amd64-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
