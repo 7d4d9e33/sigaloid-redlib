@@ -20,7 +20,10 @@ jobs:
 
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          allow-unsafe-pr-checkout: true
       
       - name: Install stable toolchain with rustfmt component
         uses: dtolnay/rust-toolchain@stable
@@ -37,7 +40,10 @@ jobs:
 
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          allow-unsafe-pr-checkout: true
 
       - name: Install stable toolchain with clippy component
         uses: dtolnay/rust-toolchain@stable

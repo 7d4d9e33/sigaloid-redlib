@@ -21,7 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          allow-unsafe-pr-checkout: true
       
       - name: Install stable toolchain
         uses: dtolnay/rust-toolchain@stable
