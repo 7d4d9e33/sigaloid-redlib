@@ -66,8 +66,10 @@ jobs:
         id: version
         run: echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
 
-      - name: Build
-        run: cargo build --release --target ${{ matrix.target }}
+      - name: Build Redlib
+        uses: houseabsolute/actions-rust-cross@v1.0.8
+        with:
+          - target: ${{ matrix.target }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
