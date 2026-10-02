@@ -18,13 +18,14 @@ jobs:
     uses: ./.github/workflows/build-artifacts.yml
   create-release:
     name: Create Release
-    uses: ubuntu-slim
+    runs-on: ubuntu-slim
     needs: build-artifact
     steps:
-      - name: Download Latest Artifacts
+      - name: Download Version Artifact
         uses: actions/download-artifact@v8
-        with: |
-          redlib-*
+        with: 
+          name: redlib_version
+
       - name: Generate Release
         uses: softprops/action-gh-release@v3
         with:
