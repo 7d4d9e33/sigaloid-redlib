@@ -32,6 +32,9 @@ jobs:
           - aarch64-unknown-linux-musl
           - armv7-unknown-linux-musleabihf
           - x86_64-pc-windows-gnu
+        profile:
+          - release
+          - debug
     steps:
       - uses: actions/checkout@v7
         with:
@@ -49,15 +52,30 @@ jobs:
         run: |
           # cargo clean is because https://github.com/cross-rs/cross/issues/724
           cargo clean
-          cross build --release --target ${{ matrix.target }}
+          if [ "${{ matrix.profile }}" = "release" ]; then
+            cross build --release --target ${{ matrix.target }}
+          elif [ "${{ matrix.profile }}" = "debug" ]; then
+            cross build --release ${{ matrix.target }}
+          else
+            echo "Unknown build profile! ${{ matrix.profile }}"
+            exit 1
+          fi
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: redlib-${{ matrix.target }}
+          name: redlib-${{ matrix.profile }}-${{ matrix.target }}
           path: |
-            target/${{ matrix.target }}/release/redlib
-            target/${{ matrix.target }}/release/redlib.exe
+            if [ "${{ matrix.profile }}" = "release" ]; then
+              target/${{ matrix.target }}/release/redlib
+              target/${{ matrix.target }}/release/redlib.exe
+            elif [ "${{ matrix.profile }}" = "debug" ]; then
+              target/${{ matrix.target }}/debug/redlib
+              target/${{ matrix.target }}/debug/redlib.exe
+            else
+              echo "Unknown build profile! ${{ matrix.profile }}"
+              exit 1
+            fi
           compression-level: 9
           if-no-files-found: error
 
