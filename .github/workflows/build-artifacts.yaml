@@ -14,18 +14,9 @@ on:
 env: 
   CARGO_TERM_COLOR: always
 
-  CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER: x86_64-linux-gnu-gcc
   CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
-  CC_x86_64_unknown_linux_musl: x86_64-linux-gnu-gcc
-  CXX_x86_64_unknown_linux_musl: x86_64-linux-gnu-g++
-  CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER: aarch64-linux-gnu-gcc
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
-  CC_aarch64_unknown_linux_musl: aarch64-linux-gnu-gcc
-  CXX_aarch64_unknown_linux_musl: aarch64-linux-gnu-g++
-  CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_LINKER: arm-linux-gnueabihf-gcc
   CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
-  CC_armv7_unknown_linux_musleabihf: arm-linux-gnueabihf-gcc
-  CXX_armv7_unknown_linux_musleabihf: arm-linux-gnueabihf-g++
 
 jobs:
   build:
