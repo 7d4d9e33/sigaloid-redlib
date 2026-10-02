@@ -55,7 +55,7 @@ jobs:
           if [ "${{ matrix.profile }}" = "release" ]; then
             cross build --release --target ${{ matrix.target }}
           elif [ "${{ matrix.profile }}" = "debug" ]; then
-            cross build --release ${{ matrix.target }}
+            cross build --target ${{ matrix.target }}
           else
             echo "Unknown build profile! ${{ matrix.profile }}"
             exit 1
