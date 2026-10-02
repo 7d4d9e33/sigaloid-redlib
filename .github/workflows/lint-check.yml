@@ -1,0 +1,48 @@
+name: Lint Check
+
+env:
+  CARGO_TERM_COLOR: always
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    name: cargo fmt --all -- --check
+    runs-on: ubuntu-slim
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      
+      - name: Install stable toolchain with rustfmt component
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: rustfmt
+
+      - name: Run cargo fmt
+        run: cargo fmt --all -- --check
+
+  clippy:
+    name: cargo clippy -- -D warnings
+    runs-on: ubuntu-slim
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+
+      - name: Install stable toolchain with clippy component
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: clippy
+
+      - name: Run cargo clippy
+        run: cargo clippy -- -D warnings
