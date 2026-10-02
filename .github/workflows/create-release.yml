@@ -1,0 +1,38 @@
+name: Pull Request
+
+env:
+  CARGO_TERM_COLOR: always
+  NEXTEST_RETRIES: 10
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build-artifact:
+    name: Build Artifact
+    uses: ./.github/workflows/build-artifacts.yml
+  create-release:
+    name: Create Release
+    uses: ubuntu-slim
+    needs: build-artifact
+    steps:
+      - name: Download Latest Artifacts
+        uses: actions/download-artifact@v8
+        with: |
+          redlib-*
+      - name: Generate Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.version.outputs.VERSION }}
+          name: ${{ steps.version.outputs.VERSION }} - ${{ github.event.head_commit.message }}
+          draft: true
+          files: |
+            redlib-${{ matrix.target }}.tar.gz
+          body: |
+            - ${{ github.event.head_commit.message }} ${{ github.sha }}
+          generate_release_notes: true

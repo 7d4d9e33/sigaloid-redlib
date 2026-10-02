@@ -45,10 +45,6 @@ jobs:
           cargo install cargo-binstall
           cargo binstall cross --force -y
 
-      - name: Extract redlib current version
-        id: version
-        run: echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
-
       - name: Build redlib
         run: |
           # cargo clean is because https://github.com/cross-rs/cross/issues/724
@@ -62,5 +58,20 @@ jobs:
           path: |
             target/${{ matrix.target }}/release/redlib
             target/${{ matrix.target }}/release/redlib.exe
+          compression-level: 9
+          if-no-files-found: error
+  upload-version:
+    name: Upload Version
+    uses: ubuntu-slim
+    steps: 
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Extract redlib current version
+        id: version
+        run: echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" > ./tmp/redlib_version
+      - name: Upload to artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: version
+          path: ./tmp/redlib_version
           compression-level: 9
           if-no-files-found: error
