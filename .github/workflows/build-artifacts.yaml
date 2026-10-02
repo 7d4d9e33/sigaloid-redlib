@@ -71,7 +71,7 @@ jobs:
 
       - name: Extract redlib current version
         id: version
-        run: echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" > redlib_version
+        run: echo "$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" > redlib_version
 
       - name: Upload to artifact
         uses: actions/upload-artifact@v7
