@@ -45,7 +45,7 @@ jobs:
 
       - name: Install cross
         run: |
-          cargo install cargo-binstall
+          cargo +stable install cargo-binstall
           cargo binstall cross --force -y
 
       - name: Build redlib
