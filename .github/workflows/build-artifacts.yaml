@@ -19,7 +19,7 @@ env:
 
 jobs:
   build:
-    name: Rust project - latest
+    name: Build Redlib
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -40,11 +40,11 @@ jobs:
           cargo install cargo-binstall
           cargo binstall cross --force -y
 
-      - name: Versions
+      - name: Extract redlib current version
         id: version
         run: echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
 
-      - name: Build
+      - name: Build redlib
         run: |
           # cargo clean is because https://github.com/cross-rs/cross/issues/724
           cargo clean
