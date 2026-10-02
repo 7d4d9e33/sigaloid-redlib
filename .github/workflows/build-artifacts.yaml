@@ -7,7 +7,7 @@ on:
       - "compose.*"
     branches:
       - "main"
-    workflow_dispatch:
+  workflow_dispatch:
   release:
     types: [published]
 
