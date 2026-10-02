@@ -16,6 +16,8 @@ env:
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
 
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -30,6 +32,8 @@ jobs:
           - x86_64-pc-windows-gnu
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
