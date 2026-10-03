@@ -53,14 +53,6 @@ jobs:
       - build-artifact
       - fetch-version
     steps:
-      - name: Download Version Artifact
-        uses: actions/download-artifact@v8
-        with: 
-          name: redlib_version
-
-      - name: Get and store redlib version
-        run: echo "REDLIB_VERSION=$(cat ./redlib_version/version)" >> "$GITHUB_ENV"
-
       - name: Download Redlib Release Artifacts
         uses: actions/download-artifact@v8
         with: 
