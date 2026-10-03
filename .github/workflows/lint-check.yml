@@ -81,8 +81,8 @@ jobs:
           echo "CLippy result: ${{ needs.clippy.outcome }}"
 
           if [[ \
-            "${{ needs.test-a.outcome }}" == "failure" ||
-            "${{ needs.test-b.outcome }}" == "failure"
+            "${{ needs.rustfmt.outcome }}" == "failure" ||
+            "${{ needs.clippy.outcome }}" == "failure"
           ]]; then
             echo "Failed jobs detected"
             exit 1
