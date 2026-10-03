@@ -59,7 +59,10 @@ jobs:
           persist-credentials: false
           allow-unsafe-pr-checkout: true
 
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Install rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
 
       - name: Install cargo-binstall
         uses: cargo-bins/cargo-binstall@v1.24.0
@@ -101,10 +104,10 @@ jobs:
           persist-credentials: false
           allow-unsafe-pr-checkout: true
 
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - Install rust with cargo
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
-          components: ""
 
       - name: Extract redlib current version
         id: version
