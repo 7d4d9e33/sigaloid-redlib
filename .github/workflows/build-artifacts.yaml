@@ -38,10 +38,10 @@ jobs:
       - run: |
           BUILD_PROFILES="[]"
           BUILD_PROFILES=$(jq -c '. + ["release"]' <<< "$BUILD_PROFILES")
-          if [[ "${{ inputs.skip-debug-build }}" == "false"]]; then
+          if [[ "${{ inputs.skip-debug-build }}" == "false" ]]; then
             BUILD_PROFILES=$(jq -c '. + ["debug"]' <<< "$BUILD_PROFILES")
           fi
-          jq 'if length == 0 then error("array is empty") else . end' << "$BUILD_PROFILES"
+          jq 'if length == 0 then error("array is empty") else . end' <<< "$BUILD_PROFILES"
           echo "build_profiles=$BUILD_PROFILES" >> "$GITHUB_OUTPUT"
 
   build:
