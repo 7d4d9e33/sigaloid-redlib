@@ -34,12 +34,12 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install rust with cargo
+      - name: Install rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
 
-      - name: Extract redlib current version
+      - name: Extract and export redlib current version
         id: version
         run: |
           echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
