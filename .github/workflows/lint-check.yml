@@ -56,7 +56,7 @@ jobs:
           components: clippy
       
       - name: Install dependencis
-        run: apt-get install -y --no-install-recommends --no-install-suggests gcc g++ git cmake make perl pkg-config libclang-dev nasm
+        run: sudo apt-get install -y --no-install-recommends --no-install-suggests gcc g++ git cmake make perl pkg-config libclang-dev nasm
 
       - name: Run cargo clippy
         run: cargo clippy -- -D warnings
