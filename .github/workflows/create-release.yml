@@ -66,8 +66,8 @@ jobs:
           name: release_artifact
           path: |
             ./release_version
-            ./redlib-release-*/redlib-release-*.tar.gz
-            ./redlib-release-*/redlib-release-*.zip
+            ./redlib-release-*/release/redlib-release-*.tar.gz
+            ./redlib-release-*/release/redlib-release-*.zip
           compression-level: 9
           if-no-files-found: error
 
