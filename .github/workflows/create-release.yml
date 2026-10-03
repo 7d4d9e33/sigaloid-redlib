@@ -21,6 +21,8 @@ jobs:
   build-artifact:
     name: Build Binary
     uses: ./.github/workflows/build-artifacts.yml
+    with:
+      skip-debug-build: true
 
   fetch-version:
     name: Upload Version
