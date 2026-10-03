@@ -8,11 +8,25 @@ on:
     branches:
       - "main"
   workflow_dispatch:
+    inputs:
+      skip_debug_build:
+        required: false
+        description: Skip maing debug build
+        type: boolean
+        default: false
   workflow_call:
+    inputs:
+      skip_debug_build:
+        required: false
+        type: boolean
+        default: false
+
 
 env: 
   RUST_BACKTRACE: full
   CARGO_TERM_COLOR: always
+
+  CI_SKIP_DEBUG_BUILD: ${{ inputs.skip_debug_build || false }}
 
   CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
@@ -35,6 +49,10 @@ jobs:
         profile:
           - release
           - debug
+    # if is true either on these conditions:
+    # - profile is not debug
+    # - profile is debug and CI_SKIP_DEBUG_BUILD environment variable set to false
+    if: matrix.profile != 'debug' || env.CI_SKIP_DEBUG_BUILD == 'false'
     steps:
       - uses: actions/checkout@v7
         with:
