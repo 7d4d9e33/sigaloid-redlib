@@ -52,7 +52,7 @@ jobs:
     # if is true either on these conditions:
     # - profile is not debug
     # - profile is debug and CI_SKIP_DEBUG_BUILD environment variable set to false
-    if: matrix.profile != 'debug' || env.CI_SKIP_DEBUG_BUILD == 'false'
+    if: ${{matrix.profile != 'debug' || env.CI_SKIP_DEBUG_BUILD == 'false'}}
     steps:
       - uses: actions/checkout@v7
         with:
