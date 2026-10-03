@@ -8,6 +8,7 @@ on:
   workflow_call:
     outputs:
       redlib_version: ${{ job.fetch-version.outputs.redlib_version }}
+  workflow_dispatch:
 
 permissions:
   contents: read
