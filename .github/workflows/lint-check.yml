@@ -25,7 +25,8 @@ jobs:
           persist-credentials: false
           allow-unsafe-pr-checkout: true
       
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Install rust with rustfmt
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
           components: rustfmt
@@ -39,7 +40,7 @@ jobs:
 
   clippy:
     name: cargo clippy -- -D warnings
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - name: Checkout sources
@@ -48,10 +49,14 @@ jobs:
           persist-credentials: false
           allow-unsafe-pr-checkout: true
 
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Install rust with rustfmt
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
           components: clippy
+      
+      - name: Install dependencis
+        run: apt-get install -y --no-install-recommends --no-install-suggests gcc g++ git cmake make perl pkg-config libclang-dev nasm
 
       - name: Run cargo clippy
         run: cargo clippy -- -D warnings
