@@ -33,7 +33,7 @@ jobs:
   prepare:
     name: Prepare Build
     runs-on: ubuntu-slim
-    permission: {}
+    permissions: {}
     steps:
       - run: |
           BUILD_PROFILES="[]"
