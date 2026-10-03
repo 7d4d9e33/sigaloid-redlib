@@ -25,14 +25,17 @@ jobs:
           persist-credentials: false
           allow-unsafe-pr-checkout: true
       
-      - name: Install stable toolchain with rustfmt component
-        uses: dtolnay/rust-toolchain@stable
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
           components: rustfmt
 
-      - name: Run cargo fmt
-        run: cargo fmt --all -- --check
+      - name: Rustfmt Check
+        uses: actions-rust-lang/rustfmt@v1
+
+      # commended because we are using problem matcher for better ui
+      # - name: Run cargo fmt
+      #   run: cargo fmt --all -- --check
 
   clippy:
     name: cargo clippy -- -D warnings
@@ -45,8 +48,7 @@ jobs:
           persist-credentials: false
           allow-unsafe-pr-checkout: true
 
-      - name: Install stable toolchain with clippy component
-        uses: dtolnay/rust-toolchain@stable
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
           components: clippy
