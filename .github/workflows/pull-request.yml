@@ -7,6 +7,9 @@ permissions:
   contents: read
 
 jobs:
+  fetch-version:
+    name: Fetch Version
+    uses: ./.github/workflows/fetch-version.yml
   lint-check:
     name: Lint Check
     uses: ./.github/workflows/lint-check.yml

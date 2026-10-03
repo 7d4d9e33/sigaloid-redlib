@@ -1,0 +1,36 @@
+name: Fetch Version
+
+env:
+  CARGO_TERM_COLOR: always
+  REDLIB_VERSION: unknown
+
+on:
+  workflow_call:
+    outputs:
+      redlib_version: ${{ job.fetch-version.outputs.redlib_version }}
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-version:
+    name: Fetch Version
+    runs-on: ubuntu-slim
+    outputs:
+      redlib_version: ${{ steps.version.VERSION }}
+    steps: 
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Extract and export redlib current version
+        id: version
+        run: |
+          echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
+
+      - run: echo "Redlib version: ${{ steps.version.VERSION }}"
