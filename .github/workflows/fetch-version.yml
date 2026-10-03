@@ -19,7 +19,7 @@ jobs:
     name: Fetch Version
     runs-on: ubuntu-slim
     outputs:
-      redlib_version: ${{ steps.version.VERSION }}
+      redlib_version: ${{ steps.version.outputs.VERSION }}
     steps: 
       - uses: actions/checkout@v7
         with:
@@ -36,4 +36,4 @@ jobs:
           echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
 
       - run: |
-          echo "Redlib version: ${{ steps.version.VERSION }}"
+          echo "Redlib version: ${{ steps.version.outputs.VERSION }}"
