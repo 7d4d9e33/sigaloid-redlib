@@ -2,20 +2,28 @@ name: Create Release
 
 env:
   CARGO_TERM_COLOR: always
-  NEXTEST_RETRIES: 10
 
 on:
   workflow_dispatch:
+    inputs:
+      draft-release:
+        type: boolean
+        description: Create release draft
+        default: false
   release:
     types: [published]
+
+env:
+  REDLIB_VERSION: unknown
 
 permissions:
   contents: read
 
 jobs:
   build-artifact:
-    name: Build Artifact
+    name: Build Binary
     uses: ./.github/workflows/build-artifacts.yml
+
   create-release:
     name: Create Release
     runs-on: ubuntu-slim
@@ -26,14 +34,55 @@ jobs:
         with: 
           name: redlib_version
 
+      - name: Get and store redlib version
+        run: echo "REDLIB_VERSION=$(cat ./redlib_version/version)" >> "$GITHUB_ENV"
+
+      - name: Download Redlib Release Artifacts
+        uses: actions/download-artifact@v8
+        with: 
+          name: redlib-release-*
+
+      - name: Package binaries
+        run: |
+          cd artifacts
+          for dir in redlib-release-*; do
+            if [ -d "$dir" ]; then
+              echo "Processing $dir..."
+              if [[ "$dir" == *"windows"* ]]; then
+                # Package Windows target as .zip
+                (cd "$dir" && zip -9 -r "../${dir}.zip" .)
+              else
+                # Package Linux/Unix targets as .tar.gz
+                tar -cvf -C "$dir" . | gzip -9 - > "${dir}.tar.gz"
+              fi
+            fi
+          done
+
+      - name: Prepare for upload artifact
+        run: 
+          echo $REDLIB_VERSION > ./release_version
+      
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: release_artifact
+          path: |
+            ./release_version
+            ./redlib-release-*/redlib-release-*.tar.gz
+            ./redlib-release-*/redlib-release-*.zip
+          compression-level: 9
+          if-no-files-found: error
+
       - name: Generate Release
         uses: softprops/action-gh-release@v3
+        if: ${{ inputs.draft-release }}
         with:
-          tag_name: ${{ steps.version.outputs.VERSION }}
+          tag_name: ${{ env.REDLIB_VERSION }}
           name: ${{ steps.version.outputs.VERSION }} - ${{ github.event.head_commit.message }}
           draft: true
           files: |
-            redlib-${{ matrix.target }}.tar.gz
+            ./redlib-release-*/redlib-release-*.tar.gz
+            ./redlib-release-*/redlib-release-*.zip
           body: |
             - ${{ github.event.head_commit.message }} ${{ github.sha }}
           generate_release_notes: true
