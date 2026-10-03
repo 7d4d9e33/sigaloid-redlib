@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  format:
+  rustfmt:
     name: cargo fmt --all -- --check
     runs-on: ubuntu-slim
     continue-on-error: true
@@ -60,3 +60,24 @@ jobs:
 
       - name: Run cargo clippy
         run: cargo clippy -- -D warnings
+
+  conclusion:
+    name: Conclude run
+    needs:
+      - rustfmt
+      - clippy
+    runs-on: ubuntu-slim
+    permissions: {}
+    steps:
+      - name: Check results
+        run: |
+          echo "Rustfmt result: ${{ needs.rustfmt.outcome }}"
+          echo "CLippy result: ${{ needs.clippy.outcome }}"
+
+          if [[ \
+            "${{ needs.test-a.outcome }}" == "failure" ||
+            "${{ needs.test-b.outcome }}" == "failure"
+          ]]; then
+            echo "Failed jobs detected"
+            exit 1
+          fi
