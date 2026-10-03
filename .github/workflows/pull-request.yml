@@ -15,4 +15,4 @@ jobs:
     uses: ./.github/workflows/code-test.yml
   build-artifact:
     name: Build Artifact
-    uses: ./.github/workflows/build-artifacts.yml
+    uses: ./.github/workflows/build-artifacts.yaml

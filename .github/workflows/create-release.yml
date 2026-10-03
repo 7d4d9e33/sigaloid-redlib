@@ -20,7 +20,7 @@ permissions:
 jobs:
   build-artifact:
     name: Build Binary
-    uses: ./.github/workflows/build-artifacts.yml
+    uses: ./.github/workflows/build-artifacts.yaml
     with:
       skip-debug-build: true
 
