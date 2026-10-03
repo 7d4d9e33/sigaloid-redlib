@@ -32,6 +32,7 @@ jobs:
         with:
           toolchain: stable
           components: rustfmt
+          cache: false
 
       - id: test
         name: Rustfmt Check
