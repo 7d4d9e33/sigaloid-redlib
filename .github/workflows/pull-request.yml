@@ -7,12 +7,9 @@ jobs:
   lint-check:
     name: Lint Check
     uses: ./.github/workflows/lint-check.yml
-    continue-on-error: true
   test-code:
     name: Code Test
     uses: ./.github/workflows/code-test.yml
-    continue-on-error: true
   build-artifact:
     name: Build Artifact
     uses: ./.github/workflows/build-artifacts.yml
-    continue-on-error: true
