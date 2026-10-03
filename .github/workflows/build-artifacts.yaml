@@ -8,8 +8,15 @@ on:
     branches:
       - "main"
   workflow_dispatch:
+    inputs:
+      skip-debug-build:
+        type: boolean
+        default: false
   workflow_call:
-
+    inputs:
+      skip-debug-build:
+        type: boolean
+        default: false
 
 env: 
   RUST_BACKTRACE: full
@@ -23,9 +30,24 @@ permissions:
   contents: read
 
 jobs:
+  prepare:
+    name: Prepare Build
+    runs-on: ubuntu-slim
+    permission: {}
+    steps:
+      - run: |
+          BUILD_PROFILES="[]"
+          BUILD_PROFILES=$(jq -c '. + ["release"]' <<< "$BUILD_PROFILES")
+          if [[ "${{ inputs.skip-debug-build }}" == "failure"]]; then
+            BUILD_PROFILES=$(jq -c '. + ["debug"]' <<< "$BUILD_PROFILES")
+          fi
+          jq 'if length == 0 then error("array is empty") else . end' << "$BUILD_PROFILES"
+          echo "build_profiles=$BUILD_PROFILES" >> "$GITHUB_OUTPUT"
+
   build:
     name: Build Artifact
     runs-on: ubuntu-latest
+    needs: prepare
     strategy:
       matrix:
         target:
@@ -33,9 +55,7 @@ jobs:
           - aarch64-unknown-linux-musl
           - armv7-unknown-linux-musleabihf
           - x86_64-pc-windows-gnu
-        profile:
-          - release
-          - debug
+        profile: ${{ fromJson(needs.prepare.outputs.build_profiles) }}
     steps:
       - uses: actions/checkout@v7
         with:
