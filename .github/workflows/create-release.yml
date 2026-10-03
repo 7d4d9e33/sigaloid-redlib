@@ -25,7 +25,7 @@ jobs:
   fetch-version:
     name: Upload Version
     runs-on: ubuntu-slim
-    output:
+    outputs:
       redlib_version: ${{ steps.version.VERSION }}
     steps: 
       - uses: actions/checkout@v7
