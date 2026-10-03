@@ -39,7 +39,7 @@ jobs:
       - name: Download Redlib Release Artifacts
         uses: actions/download-artifact@v8
         with: 
-          name: redlib-release-*
+          pattern: redlib-release-*
 
       - name: Package binaries
         run: |
