@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-slim
     continue-on-error: true
     outputs:
-      result: ${{ steps.test.outcome }}
+      outcome: ${{ steps.test.outcome }}
     steps:
       - name: Checkout sources
         uses: actions/checkout@v7
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     outputs:
-      result: ${{ steps.test.outcome }}
+      outcome: ${{ steps.test.outcome }}
     steps:
       - name: Checkout sources
         uses: actions/checkout@v7
@@ -77,12 +77,12 @@ jobs:
     steps:
       - name: Check results
         run: |
-          echo "Rustfmt result: ${{ needs.rustfmt.result }}"
-          echo "Clippy result: ${{ needs.clippy.result }}"
+          echo "Rustfmt result: ${{ needs.rustfmt.outcome }}"
+          echo "Clippy result: ${{ needs.clippy.outcome }}"
 
           if [[ \
-            "${{ needs.rustfmt.result }}" == "failure" ||
-            "${{ needs.clippy.result }}" == "failure"
+            "${{ needs.rustfmt.outcome }}" == "failure" ||
+            "${{ needs.clippy.outcome }}" == "failure"
           ]]; then
             echo "Failed jobs detected"
             exit 1
