@@ -2,7 +2,6 @@ name: Create Release
 
 env:
   CARGO_TERM_COLOR: always
-  REDLIB_VERSION: unknown
 
 on:
   workflow_dispatch:
