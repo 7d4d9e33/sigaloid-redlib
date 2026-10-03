@@ -77,12 +77,12 @@ jobs:
     steps:
       - name: Check results
         run: |
-          echo "Rustfmt result: ${{ needs.rustfmt.outcome }}"
-          echo "CLippy result: ${{ needs.clippy.outcome }}"
+          echo "Rustfmt result: ${{ needs.rustfmt.result }}"
+          echo "Clippy result: ${{ needs.clippy.result }}"
 
           if [[ \
-            "${{ needs.rustfmt.outcome }}" == "failure" ||
-            "${{ needs.clippy.outcome }}" == "failure"
+            "${{ needs.rustfmt.result }}" == "failure" ||
+            "${{ needs.clippy.result }}" == "failure"
           ]]; then
             echo "Failed jobs detected"
             exit 1
