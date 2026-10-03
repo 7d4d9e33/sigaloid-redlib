@@ -34,7 +34,7 @@ jobs:
     name: Prepare Build
     runs-on: ubuntu-slim
     permissions: {}
-    output:
+    outputs:
       build_profiles: ${{ steps.set-build-profile-matrix.outputs.BUILD_PROFILES }}
     steps:
       - id: set-build-profile-matrix
