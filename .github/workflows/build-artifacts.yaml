@@ -66,16 +66,10 @@ jobs:
         with:
           name: redlib-${{ matrix.profile }}-${{ matrix.target }}
           path: |
-            if [ "${{ matrix.profile }}" = "release" ]; then
-              target/${{ matrix.target }}/release/redlib
-              target/${{ matrix.target }}/release/redlib.exe
-            elif [ "${{ matrix.profile }}" = "debug" ]; then
-              target/${{ matrix.target }}/debug/redlib
-              target/${{ matrix.target }}/debug/redlib.exe
-            else
-              echo "Unknown build profile! ${{ matrix.profile }}"
-              exit 1
-            fi
+            target/${{ matrix.target }}/release/redlib
+            target/${{ matrix.target }}/release/redlib.exe
+            target/${{ matrix.target }}/debug/redlib
+            target/${{ matrix.target }}/debug/redlib.exe
           compression-level: 9
           if-no-files-found: error
 
