@@ -43,7 +43,6 @@ jobs:
 
       - name: Package binaries
         run: |
-          cd artifacts
           for dir in redlib-release-*; do
             if [ -d "$dir" ]; then
               echo "Processing $dir..."
