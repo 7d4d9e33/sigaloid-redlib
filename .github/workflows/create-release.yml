@@ -102,7 +102,7 @@ jobs:
         if: ${{ inputs.draft-release }}
         with:
           tag_name: ${{ needs.fetch-version.outputs.redlib_version }}
-          name: ${{ steps.version.outputs.VERSION }} - ${{ github.event.head_commit.message }}
+          name: ${{ needs.fetch-version.outputs.redlib_version }} - ${{ github.event.head_commit.message }}
           draft: true
           files: |
             ./redlib-release-*/redlib-release-*.tar.gz
