@@ -34,8 +34,11 @@ jobs:
     name: Prepare Build
     runs-on: ubuntu-slim
     permissions: {}
+    output:
+      build_profiles: ${{ steps.set-build-profile-matrix.outputs.BUILD_PROFILES }}
     steps:
-      - run: |
+      - id: set-build-profile-matrix
+        run: |
           BUILD_PROFILES="[]"
           BUILD_PROFILES=$(jq -c '. + ["release"]' <<< "$BUILD_PROFILES")
           if [[ "${{ inputs.skip-debug-build }}" == "false" ]]; then
@@ -55,7 +58,7 @@ jobs:
           - aarch64-unknown-linux-musl
           - armv7-unknown-linux-musleabihf
           - x86_64-pc-windows-gnu
-        profile: ${{ fromJson(needs.prepare.outputs.BUILD_PROFILES) }}
+        profile: ${{ fromJson(needs.prepare.outputs.build_profiles) }}
     steps:
       - uses: actions/checkout@v7
         with:
