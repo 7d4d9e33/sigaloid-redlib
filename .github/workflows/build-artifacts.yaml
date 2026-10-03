@@ -51,7 +51,7 @@ jobs:
         uses: cargo-bins/cargo-binstall@v1.24.0
 
       - name: Install cross
-        run: cargo binstall cross --no-confirm
+        run: cargo binstall --force -y cross
 
       - name: Build redlib
         run: |
