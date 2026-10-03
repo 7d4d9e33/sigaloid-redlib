@@ -100,29 +100,3 @@ jobs:
             target/${{ matrix.target }}/debug/redlib.exe
           compression-level: 9
           if-no-files-found: error
-
-  upload-version:
-    name: Upload Version
-    runs-on: ubuntu-slim
-    steps: 
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-          allow-unsafe-pr-checkout: true
-
-      - name: Install rust with cargo
-        uses: actions-rust-lang/setup-rust-toolchain@v1
-        with:
-          toolchain: stable
-
-      - name: Extract redlib current version
-        id: version
-        run: echo "$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" > redlib_version
-
-      - name: Upload to artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: version
-          path: redlib_version
-          compression-level: 9
-          if-no-files-found: error

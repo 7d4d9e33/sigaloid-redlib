@@ -22,10 +22,34 @@ jobs:
     name: Build Binary
     uses: ./.github/workflows/build-artifacts.yml
 
+  fetch-version:
+    name: Upload Version
+    runs-on: ubuntu-slim
+    output:
+      redlib_version: ${{ steps.version.VERSION }}
+    steps: 
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install rust with cargo
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Extract redlib current version
+        id: version
+        run: |
+          echo "VERSION=$(cargo metadata --format-version 1 --no-deps | jq .packages[0].version -r | sed 's/^/v/')" >> "$GITHUB_OUTPUT"
+
   create-release:
     name: Create Release
     runs-on: ubuntu-slim
-    needs: build-artifact
+    permissions:
+      contents: write
+    needs: 
+      - build-artifact
+      - fetch-version
     steps:
       - name: Download Version Artifact
         uses: actions/download-artifact@v8
@@ -58,7 +82,7 @@ jobs:
 
       - name: Prepare for upload artifact
         run: 
-          echo $REDLIB_VERSION > ./release_version
+          echo "${{ needs.fetch-version.outputs.redlib_version }}" > ./release_version
       
       - name: Upload release artifact
         uses: actions/upload-artifact@v7
@@ -75,7 +99,7 @@ jobs:
         uses: softprops/action-gh-release@v3
         if: ${{ inputs.draft-release }}
         with:
-          tag_name: ${{ env.REDLIB_VERSION }}
+          tag_name: ${{ needs.fetch-version.outputs.redlib_version }}
           name: ${{ steps.version.outputs.VERSION }} - ${{ github.event.head_commit.message }}
           draft: true
           files: |
