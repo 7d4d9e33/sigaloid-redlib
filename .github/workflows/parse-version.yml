@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   parse-version:
-    name:  Version
+    name: Parse version
     runs-on: ubuntu-slim
     outputs:
       redlib_version: ${{ steps.version.outputs.VERSION }}
