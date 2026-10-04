@@ -60,6 +60,7 @@ jobs:
         with:
           toolchain: stable
           components: clippy
+          cache: false
       
       - name: Install dependencis
         run: |

@@ -69,6 +69,7 @@ jobs:
         uses: actions-rust-lang/setup-rust-toolchain@v2
         with:
           toolchain: stable
+          cache: false
 
       - name: Install cargo-binstall
         uses: cargo-bins/cargo-binstall@v1.24.0
