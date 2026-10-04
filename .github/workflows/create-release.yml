@@ -17,16 +17,15 @@ permissions:
   contents: read
 
 jobs:
-  build-artifact:
-    name: Build Binary
+  build:
     uses: ./.github/workflows/build-artifacts.yaml
     with:
       skip-debug-build: true
 
-  parse-version:
+  get-version:
     uses: ./.github/workflows/parse-version.yml
 
-  create-release:
+  make-release:
     name: Create Release
     runs-on: ubuntu-slim
     permissions:
@@ -57,7 +56,7 @@ jobs:
 
       - name: Prepare for upload artifact
         run: 
-          echo "${{ needs.fetch-version.outputs.redlib_version }}" > ./release_version
+          echo "${{ needs.get-version.outputs.redlib_version }}" > ./release_version
       
       - name: Upload release artifact
         uses: actions/upload-artifact@v7
@@ -74,8 +73,8 @@ jobs:
         uses: softprops/action-gh-release@v3
         if: ${{ inputs.draft-release }}
         with:
-          tag_name: ${{ needs.fetch-version.outputs.redlib_version }}
-          name: ${{ needs.fetch-version.outputs.redlib_version }} - ${{ github.event.head_commit.message }}
+          tag_name: ${{ needs.get-version.outputs.redlib_version }}
+          name: ${{ needs.get-version.outputs.redlib_version }} - ${{ github.event.head_commit.message }}
           draft: true
           files: |
             ./redlib-release-*/redlib-release-*.tar.gz

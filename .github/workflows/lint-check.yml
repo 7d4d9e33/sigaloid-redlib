@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   rustfmt:
-    name: rustfmt
+    name: Run rustfmt
     runs-on: ubuntu-slim
     continue-on-error: true
     outputs:
@@ -43,7 +43,7 @@ jobs:
       #   run: cargo fmt --all -- --check
 
   clippy:
-    name: clippy
+    name: Run clippy
     runs-on: ubuntu-latest
     continue-on-error: true
     outputs:

@@ -7,5 +7,5 @@ permissions:
   contents: read
 
 jobs:
-  build-artifact:
+  lint:
     uses: ./.github/workflows/lint-check.yml

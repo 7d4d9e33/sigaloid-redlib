@@ -1,4 +1,4 @@
-name: Code Test
+name: Test
 
 env:
   RUST_BACKTRACE: full
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   test:
-    name: Code Test
+    name: Test
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
