@@ -34,6 +34,7 @@ jobs:
         with:
           toolchain: stable
           cache: false
+          build-warnings: warn
       
       - name: Install cargo-nextest
         uses: taiki-e/install-action@nextest

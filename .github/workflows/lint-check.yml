@@ -33,6 +33,7 @@ jobs:
           toolchain: stable
           components: rustfmt
           cache: false
+          build-warnings: warn
 
       - id: test
         name: Rustfmt Check
@@ -61,6 +62,7 @@ jobs:
           toolchain: stable
           components: clippy
           cache: false
+          build-warnings: warn
       
       - name: Install dependencis
         run: |

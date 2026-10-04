@@ -30,6 +30,7 @@ jobs:
         with:
           toolchain: stable
           cache: false
+          build-warnings: warn
 
       - name: Extract and export redlib current version
         id: version

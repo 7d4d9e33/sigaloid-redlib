@@ -70,6 +70,7 @@ jobs:
         with:
           toolchain: stable
           cache: false
+          build-warnings: warn
 
       - name: Install cargo-binstall
         uses: cargo-bins/cargo-binstall@v1.24.0
