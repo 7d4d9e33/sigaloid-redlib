@@ -1,0 +1,11 @@
+name: Fetch Version (PR)
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-artifact:
+    uses: ./.github/workflows/fetch-version.yml
