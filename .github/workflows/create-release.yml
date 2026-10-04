@@ -23,9 +23,8 @@ jobs:
     with:
       skip-debug-build: true
 
-  fetch-version:
-    name: Fetch Version
-    uses: ./.github/workflows/fetch-version.yml
+  parse-version:
+    uses: ./.github/workflows/parse-version.yml
 
   create-release:
     name: Create Release

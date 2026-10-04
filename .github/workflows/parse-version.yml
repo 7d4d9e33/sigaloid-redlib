@@ -1,4 +1,4 @@
-name: Fetch Version
+name: Parse Version
 
 env:
   CARGO_TERM_COLOR: always
@@ -15,8 +15,8 @@ permissions:
   contents: read
 
 jobs:
-  fetch-version:
-    name: Fetch Version
+  parse-version:
+    name:  Version
     runs-on: ubuntu-slim
     outputs:
       redlib_version: ${{ steps.version.outputs.VERSION }}

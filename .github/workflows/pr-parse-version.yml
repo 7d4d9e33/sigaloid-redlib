@@ -1,4 +1,4 @@
-name: Fetch Version (PR)
+name: Parse Version (PR)
 
 on:
   pull_request:
@@ -8,4 +8,4 @@ permissions:
 
 jobs:
   build-artifact:
-    uses: ./.github/workflows/fetch-version.yml
+    uses: ./.github/workflows/parse-version.yml
