@@ -8,4 +8,4 @@ permissions:
 
 jobs:
   build-artifact:
-    uses: ./.github/workflows/code-test.yaml
+    uses: ./.github/workflows/code-test.yml
