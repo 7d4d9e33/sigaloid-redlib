@@ -27,7 +27,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           persist-credentials: false
-          allow-unsafe-pr-checkout: true
       
       - name: Install rust
         uses: actions-rust-lang/setup-rust-toolchain@v2
