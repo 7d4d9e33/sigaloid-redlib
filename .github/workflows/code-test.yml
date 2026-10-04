@@ -20,6 +20,8 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     continue-on-error: true
+    outputs:
+      outcome: ${{ steps.test.outcome }}
     steps:
       - name: Checkout sources
         uses: actions/checkout@v7
@@ -35,5 +37,22 @@ jobs:
       - name: Install cargo-nextest
         uses: taiki-e/install-action@nextest
 
-      - name: Run cargo nextest
+      - id: test
+        name: Run cargo nextest
         run: cargo nextest run
+
+  conclusion:
+    name: Conclude run
+    needs:
+      - test
+    runs-on: ubuntu-slim
+    permissions: {}
+    steps:
+      - name: Check results
+        run: |
+          echo "Test result: ${{ needs.test.outputs.outcome }}"
+
+          if [[ "${{ needs.test.outputs.outcome }}" == "failure" ]]; then
+            echo "Failed jobs detected"
+            exit 1
+          fi
