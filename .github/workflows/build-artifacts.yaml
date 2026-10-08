@@ -22,6 +22,7 @@ env:
   RUST_BACKTRACE: full
   CARGO_TERM_COLOR: always
 
+  CARGO_TARGET_I586_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_I686_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
