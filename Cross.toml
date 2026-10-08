@@ -1,3 +1,10 @@
+[target.i586-unknown-linux-musl]
+pre-build = [
+  "apt-get update",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-i686-linux-gnu g++-i686-linux-gnu libc6-dev-i386-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
+  "rm -rf /var/cache/apt/*"
+]
+
 [target.i686-unknown-linux-musl]
 pre-build = [
   "apt-get update",
