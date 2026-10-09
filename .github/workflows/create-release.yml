@@ -71,10 +71,6 @@ jobs:
       - name: Prepare for upload artifact
         run: |
           echo "${{ needs.get-version.outputs.redlib_version }}" > ./release_version
-
-          if [[ "${{ inputs.draft-release }}" == "false" ]]; then
-            tar -cvf ./redlib_releases.tar.gz -I 'gzip -9' redlib-*.tar.gz redlib-*.zip
-          fi
       
       - name: Upload release artifact
         uses: actions/upload-artifact@v7
@@ -82,7 +78,8 @@ jobs:
           name: release_artifact
           path: |
             ./release_version
-            ./redlib_releases.tar.gz
+            ./redlib-*.tar.gz
+            ./redlib-*.zip
           compression-level: 9
           if-no-files-found: error
 
