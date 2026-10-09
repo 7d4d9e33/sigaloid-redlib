@@ -73,7 +73,7 @@ jobs:
           echo "${{ needs.get-version.outputs.redlib_version }}" > ./release_version
 
           if [[ "${{ inputs.draft-release }}" == "false" ]]; then
-            tar -cvf ./redlib_releases.tar.gz -I 'gzip -9' redlib-*.tar.gz redlib-*.tgz redlib-*.zip
+            tar -cvf ./redlib_releases.tar.gz -I 'gzip -9' redlib-*.tar.gz redlib-*.zip
           fi
       
       - name: Upload release artifact
