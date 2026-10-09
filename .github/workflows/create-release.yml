@@ -10,8 +10,6 @@ on:
         type: boolean
         description: Create release draft
         default: false
-  release:
-    types: [published]
 
 permissions:
   contents: read
