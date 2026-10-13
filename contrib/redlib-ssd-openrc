@@ -21,6 +21,7 @@ redlib_config_location="${redlib_config_directory}/${redlib_config_toml_name}"
 # Only allow binding to ports lower than 1024 on Linux
 capabilities="^cap_net_bind_service"
 no_new_privs="yes"
+umask="0077"
 
 output_log="${redlib_log_directory}/app.log"
 error_log="${redlib_log_directory}/app.err"
