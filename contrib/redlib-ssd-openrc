@@ -1,0 +1,44 @@
+#!/sbin/openrc-run
+
+name="Redlib (start-stop-daemon)"
+description="Private Reddit frontend"
+
+command="/usr/local/bin/redlib"
+
+redlib_config_directory="/etc/redlib"
+redlib_config_toml_name="redlib.toml"
+
+command_user="nobody:nobody"
+
+config_home_owner="root"
+config_home_group="root"
+
+redlib_log_directory="/var/log/redlib"
+
+directory="${redlib_config_directory}"
+redlib_config_location="${redlib_config_directory}/${redlib_config_toml_name}"
+
+# Only allow binding to ports lower than 1024 on Linux
+capabilities="^cap_net_bind_service"
+no_new_privs="yes"
+
+output_log="${redlib_log_directory}/app.log"
+error_log="${redlib_log_directory}/app.err"
+
+command_background=true
+pidfile="/var/run/${RC_SVCNAME}.pid"
+
+start_pre() {
+    checkpath --directory --mode 0755 "$redlib_config_directory"
+    if [ -e "$redlib_config_location" ]; then
+        checkpath --file --mode 0644 --owner "${config_home_owner}:${config_home_group}" "${redlib_config_location}"
+    fi
+
+    checkpath --directory --mode 0755 --owner "${command_user}" "${redlib_log_directory}"
+    checkpath --file --mode 0644 --owner "${command_user}" "${output_log}" "${error_log}"
+}
+
+depend() {
+	want net
+	after firewall
+}
