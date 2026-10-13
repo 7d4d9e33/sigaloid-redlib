@@ -3,7 +3,7 @@
 name="Redlib (start-stop-daemon)"
 description="Private Reddit frontend"
 
-command="/usr/local/bin/redlib"
+command="/usr/bin/redlib"
 
 redlib_config_directory="/etc/redlib"
 redlib_config_toml_name="redlib.toml"
