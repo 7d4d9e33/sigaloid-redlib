@@ -4,6 +4,7 @@ name="Redlib (supervise-daemon)"
 description="Private Reddit frontend"
 
 command="/usr/bin/redlib"
+# command_args="-a 0.0.0.0 -p 8080"
 
 redlib_config_directory="/etc/redlib"
 redlib_config_toml_name="redlib.toml"
