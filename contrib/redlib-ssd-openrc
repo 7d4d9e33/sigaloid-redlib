@@ -30,7 +30,7 @@ command_background=true
 pidfile="/var/run/${RC_SVCNAME}.pid"
 
 start_pre() {
-    checkpath --directory --mode 0755 "$redlib_config_directory"
+    checkpath --directory --mode 0755 --owner "${config_home_owner}:${config_home_group}" "$redlib_config_directory"
     if [ -e "$redlib_config_location" ]; then
         checkpath --file --mode 0644 --owner "${config_home_owner}:${config_home_group}" "${redlib_config_location}"
     fi
