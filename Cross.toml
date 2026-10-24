@@ -1,3 +1,8 @@
+[build.env]
+passthrough = [
+    "RUST_BACKTRACE"
+]
+
 [target.i586-unknown-linux-musl]
 pre-build = [
   "apt-get update",
