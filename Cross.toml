@@ -44,7 +44,7 @@ pre-build = [
   "rm -rf /var/cache/apt/*"
 ]
 
-[target.armv7-unknown-linux-musleabihf]
+[target.armv7-unknown-linux-musleabihf.env]
 passthrough = [
     "CFLAGS_armv7_unknown_linux_musleabihf",
     "CXXFLAGS_armv7_unknown_linux_musleabihf",
