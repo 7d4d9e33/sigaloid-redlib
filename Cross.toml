@@ -8,7 +8,7 @@ pre-build = [
 [target.i586-unknown-linux-musl.env]
 passthrough = [
     "CFLAGS_i586_unknown_linux_musl",
-    "CXXFLAGS_i586_unknown_linux_musl,
+    "CXXFLAGS_i586_unknown_linux_musl",
 ]
 
 [target.i686-unknown-linux-musl]
@@ -21,7 +21,7 @@ pre-build = [
 [target.i686-unknown-linux-musl.env]
 passthrough = [
     "CFLAGS_i686_unknown_linux_musl",
-    "CXXFLAGS_i686_unknown_linux_musl,
+    "CXXFLAGS_i686_unknown_linux_musl",
 ]
 
 [target.x86_64-unknown-linux-musl]
@@ -34,7 +34,7 @@ pre-build = [
 [target.x86_64-unknown-linux-musl.env]
 passthrough = [
     "CFLAGS_x86_64_unknown_linux_musl",
-    "CXXFLAGS_x86_64_unknown_linux_musl,
+    "CXXFLAGS_x86_64_unknown_linux_musl",
 ]
 
 [target.armv7-unknown-linux-musleabihf]
@@ -47,7 +47,7 @@ pre-build = [
 [target.armv7-unknown-linux-musleabihf]
 passthrough = [
     "CFLAGS_armv7_unknown_linux_musleabihf",
-    "CXXFLAGS_armv7_unknown_linux_musleabihf,
+    "CXXFLAGS_armv7_unknown_linux_musleabihf",
 ]
 
 [target.aarch64-unknown-linux-musl]
@@ -60,7 +60,7 @@ pre-build = [
 [target.aarch64-unknown-linux-musl.env]
 passthrough = [
     "CFLAGS_aarch64_unknown_linux_musl",
-    "CXXFLAGS_aarch64_unknown_linux_musl,
+    "CXXFLAGS_aarch64_unknown_linux_musl",
 ]
 
 [target.i686-pc-windows-gnu]
@@ -73,7 +73,7 @@ pre-build = [
 [target.i686-pc-windows-gnu.env]
 passthrough = [
     "CFLAGS_i686_pc_windows_gnu",
-    "CXXFLAGS_i686_pc_windows_gnu,
+    "CXXFLAGS_i686_pc_windows_gnu",
 ]
 
 [target.x86_64-pc-windows-gnu]
@@ -86,5 +86,5 @@ pre-build = [
 [target.x86_64-pc-windows-gnu.env]
 passthrough = [
     "CFLAGS_x86_64_pc_windows_gnu",
-    "CXXFLAGS_x86_64_pc_windows_gnu,
+    "CXXFLAGS_x86_64_pc_windows_gnu",
 ]
