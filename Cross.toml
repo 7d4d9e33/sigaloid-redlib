@@ -1,6 +1,7 @@
 [build.env]
 passthrough = [
-    "RUST_BACKTRACE"
+    "RUST_BACKTRACE",
+    "BINDGEN_EXTRA_CLANG_ARGS"
 ]
 
 [target.i586-unknown-linux-musl]
