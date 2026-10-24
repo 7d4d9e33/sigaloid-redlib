@@ -29,6 +29,7 @@ env:
   CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
 
   CFLAGS_i686_unknown_linux_musl: "-msse2"
+  CXXFLAGS_i686_unknown_linux_musl: "-msse2"
 
 permissions:
   contents: read
