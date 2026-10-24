@@ -4,6 +4,8 @@ passthrough = [
 ]
 
 [target.i586-unknown-linux-musl]
+# image info: https://github.com/cross-rs/cross/pkgs/container/i586-unknown-linux-gnu/1431878034
+image = "ghcr.io/cross-rs/i586-unknown-linux-gnu@sha256:61c40c9c94ffae4d349fb315cf0c3fdb1b0ddf2f9d6902eb1fb566e7a48695ae"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-i686-linux-gnu g++-i686-linux-gnu libc6-dev-i386-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
@@ -17,6 +19,8 @@ passthrough = [
 ]
 
 [target.i686-unknown-linux-musl]
+# image info: https://github.com/orgs/cross-rs/packages/container/i686-unknown-linux-gnu/1431949218
+image = "ghcr.io/cross-rs/i686-unknown-linux-gnu@sha256:28116989c6067e3849b655cb334c30d824e82409365e5b8546405412b34ccdfe"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-i686-linux-gnu g++-i686-linux-gnu libc6-dev-i386-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
@@ -30,6 +34,8 @@ passthrough = [
 ]
 
 [target.x86_64-unknown-linux-musl]
+# image info: https://github.com/cross-rs/cross/pkgs/container/x86_64-unknown-linux-musl/1431978931
+image = "ghcr.io/cross-rs/x86_64-unknown-linux-musl@sha256:8ef2d210f1b7a9d3bbe18bd131788bd90dc3e9654264281dbc7d3954be4c6754"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-x86-64-linux-gnu g++-x86-64-linux-gnu libc6-dev-amd64-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
@@ -43,6 +49,8 @@ passthrough = [
 ]
 
 [target.armv7-unknown-linux-musleabihf]
+# image info: https://github.com/cross-rs/cross/pkgs/container/armv7-unknown-linux-musleabihf/1432007983
+image = "ghcr.io/cross-rs/armv7-unknown-linux-musleabihf@sha256:d6c63d570fb4590099af95732af60e8bfbb71a2c46c5dcd501fa284f4711bb44"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf libc6-dev-armhf-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
@@ -56,6 +64,8 @@ passthrough = [
 ]
 
 [target.aarch64-unknown-linux-musl]
+# image info: https://github.com/cross-rs/cross/pkgs/container/aarch64-unknown-linux-musl/1432027719
+image = "ghcr.io/cross-rs/aarch64-unknown-linux-musl@sha256:d98adcb95bf878c0c0e4572365d7be93329cc6a10ff963899480e49ea013cc73"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
@@ -69,6 +79,8 @@ passthrough = [
 ]
 
 [target.i686-pc-windows-gnu]
+# image info: https://github.com/cross-rs/cross/pkgs/container/i686-pc-windows-gnu/1431952990
+image = "ghcr.io/cross-rs/i686-pc-windows-gnu@sha256:de49ecced31c579ffa76f607d1346d3bd1d028897ec82916d5421c1a2be89d1e"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-mingw-w64-i686 g++-mingw-w64-i686 libc6-dev-i386-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
@@ -82,6 +94,8 @@ passthrough = [
 ]
 
 [target.x86_64-pc-windows-gnu]
+# image info: https://github.com/cross-rs/cross/pkgs/container/x86_64-pc-windows-gnu/1431984076
+image = "ghcr.io/cross-rs/x86_64-pc-windows-gnu@sha256:1fc847f41f582af5868b33914736803e43c4543c0cdf1a8f21d220c4158aa191"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 libc6-dev-amd64-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
