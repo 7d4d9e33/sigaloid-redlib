@@ -99,7 +99,7 @@ passthrough = [
 image = "ghcr.io/cross-rs/x86_64-pc-windows-gnu:main"
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-amd64-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-amd64-cross musl-tools git cmake make perl pkg-config clang libclang-dev nasm",
   "rm -rf /var/cache/apt/*"
 ]
 
