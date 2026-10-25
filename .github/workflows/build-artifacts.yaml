@@ -35,6 +35,9 @@ env:
   CFLAGS_i686_unknown_linux_musl: "-msse2"
   CXXFLAGS_i686_unknown_linux_musl: "-msse2"
 
+  CFLAGS_i686_pc_windows_gnu: "-msse2"
+  CXXFLAGS_i686_pc_windows_gnu: "-msse2"
+
 permissions:
   contents: read
 
