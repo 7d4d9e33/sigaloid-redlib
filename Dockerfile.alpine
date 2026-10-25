@@ -8,7 +8,7 @@ ARG ALPINE_VERSION=3.24
 ########################
 FROM rust:alpine${ALPINE_VERSION} AS builder
 
-RUN apk add --update-cache --no-cache gcc g++ clang-dev git cmake make perl pkgconf nasm \
+RUN apk add --update-cache --no-cache gcc g++ clang-dev git cmake make perl pkgconf \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /redlib

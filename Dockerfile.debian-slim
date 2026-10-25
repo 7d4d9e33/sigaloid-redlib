@@ -9,7 +9,7 @@ ARG DEBIAN_VERSION_CODENAME=trixie
 FROM rust:slim-${DEBIAN_VERSION_CODENAME} AS builder
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends --no-install-suggests gcc g++ libclang-dev git cmake make perl pkg-config nasm \
+    && apt-get install -y --no-install-recommends --no-install-suggests gcc g++ libclang-dev git cmake make perl pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /redlib
