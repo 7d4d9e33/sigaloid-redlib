@@ -1,3 +1,11 @@
+[build.env]
+passthrough = [
+    "RUST_BACKTRACE",
+    "BINDGEN_EXTRA_CLANG_ARGS",
+    "CFLAGS",
+    "CXXFLAGS"
+]
+
 [target.i586-unknown-linux-musl]
 pre-build = [
   "apt-get update",
