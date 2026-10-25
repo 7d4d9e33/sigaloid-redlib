@@ -64,6 +64,7 @@ passthrough = [
 ]
 
 [target.i686-pc-windows-gnu]
+image = "ghcr.io/cross-rs/i686-pc-windows-gnu:main"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-mingw-w64-i686 g++-mingw-w64-i686 libc6-dev-i386-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
@@ -77,6 +78,7 @@ passthrough = [
 ]
 
 [target.x86_64-pc-windows-gnu]
+image = "ghcr.io/cross-rs/x86_64-pc-windows-gnu:main"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 libc6-dev-amd64-cross musl-tools git cmake make perl pkg-config libclang-dev nasm",
