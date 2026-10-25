@@ -87,7 +87,7 @@ jobs:
 
       - name: Add some envs
         run: |
-          export BINDGEN_EXTRA_CLANG_ARGS="--target=${{ matrix.profile }}"
+          export BINDGEN_EXTRA_CLANG_ARGS="--target=${{ matrix.target }}"
           echo "BINDGEN_EXTRA_CLANG_ARGS=$BINDGEN_EXTRA_CLANG_ARGS" >> $GITHUB_ENV
 
       - name: Build redlib
