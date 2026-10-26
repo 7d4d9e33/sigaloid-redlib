@@ -27,7 +27,7 @@ env:
   CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
-  CARGO_TARGET_X86_64_PC_WINDOWS_GNU_RUSTFLAGS: "-C target-feature=+sse2"
+  CARGO_TARGET_X86_64_PC_WINDOWS_GNU_RUSTFLAGS: "-C link-args=-static-libstdc++ -C link-args=-static-libgcc -C target-feature=+sse2"
 
   CFLAGS_i586_unknown_linux_musl: "-DOPENSSL_NO_ASM=ON"
   CXXFLAGS_i586_unknown_linux_musl: "-DOPENSSL_NO_ASM=ON"
