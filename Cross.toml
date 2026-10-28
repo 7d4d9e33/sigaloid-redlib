@@ -22,7 +22,6 @@ passthrough = [
 
 # Compiler packages: gcc-i686-linux-gnu g++-i686-linux-gnu
 [target.i686-unknown-linux-musl]
-image = "ghcr.io/cross-rs/i686-unknown-linux-musl:main"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev",
