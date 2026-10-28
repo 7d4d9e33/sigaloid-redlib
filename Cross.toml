@@ -36,6 +36,7 @@ passthrough = [
 
 # Compiler packages: gcc-x86-64-linux-gnu g++-x86-64-linux-gnu
 [target.x86_64-unknown-linux-musl]
+image = "ghcr.io/cross-rs/x86_64-unknown-linux-musl:main"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-amd64-cross git cmake make perl pkg-config clang libclang-dev",
@@ -50,6 +51,7 @@ passthrough = [
 
 # Compiler packages: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 [target.armv7-unknown-linux-musleabihf]
+image = "ghcr.io/cross-rs/armv7-unknown-linux-musleabihf:main"
 pre-build = [
   "apt-get update",
   "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-armhf-cross git cmake make perl pkg-config clang libclang-dev",
