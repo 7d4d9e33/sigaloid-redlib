@@ -1,10 +1,12 @@
 [build.env]
 passthrough = [
     "RUST_BACKTRACE",
-    "BINDGEN_EXTRA_CLANG_ARGS"
+    "BINDGEN_EXTRA_CLANG_ARGS",
+    "CFLAGS",
+    "CXXFLAGS"
 ]
 
-# compiler packages: gcc-i686-linux-gnu g++-i686-linux-gnu
+# Compiler packages: gcc-i686-linux-gnu g++-i686-linux-gnu
 [target.i586-unknown-linux-musl]
 pre-build = [
   "apt-get update",
@@ -18,7 +20,7 @@ passthrough = [
     "CXXFLAGS_i586_unknown_linux_musl",
 ]
 
-# compiler packages: gcc-i686-linux-gnu g++-i686-linux-gnu
+# Compiler packages: gcc-i686-linux-gnu g++-i686-linux-gnu
 [target.i686-unknown-linux-musl]
 pre-build = [
   "apt-get update",
@@ -32,7 +34,7 @@ passthrough = [
     "CXXFLAGS_i686_unknown_linux_musl",
 ]
 
-# compiler packages: gcc-x86-64-linux-gnu g++-x86-64-linux-gnu 
+# Compiler packages: gcc-x86-64-linux-gnu g++-x86-64-linux-gnu
 [target.x86_64-unknown-linux-musl]
 pre-build = [
   "apt-get update",
@@ -46,7 +48,7 @@ passthrough = [
     "CXXFLAGS_x86_64_unknown_linux_musl",
 ]
 
-# compiler packages: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+# Compiler packages: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 [target.armv7-unknown-linux-musleabihf]
 pre-build = [
   "apt-get update",
@@ -60,7 +62,7 @@ passthrough = [
     "CXXFLAGS_armv7_unknown_linux_musleabihf",
 ]
 
-# compiler packages: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+# Compiler packages: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 [target.aarch64-unknown-linux-musl]
 pre-build = [
   "apt-get update",
@@ -74,7 +76,7 @@ passthrough = [
     "CXXFLAGS_aarch64_unknown_linux_musl",
 ]
 
-# compiler packages: gcc-mingw-w64-i686 g++-mingw-w64-i686
+# Compiler packages: gcc-mingw-w64-i686 g++-mingw-w64-i686
 [target.i686-pc-windows-gnu]
 image = "ghcr.io/cross-rs/i686-pc-windows-gnu:main"
 pre-build = [
@@ -89,7 +91,7 @@ passthrough = [
     "CXXFLAGS_i686_pc_windows_gnu",
 ]
 
-# compiler packages: gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64
+# Compiler packages: gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64
 [target.x86_64-pc-windows-gnu]
 image = "ghcr.io/cross-rs/x86_64-pc-windows-gnu:main"
 pre-build = [
