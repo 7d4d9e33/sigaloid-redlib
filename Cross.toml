@@ -10,7 +10,7 @@ passthrough = [
 [target.i586-unknown-linux-musl]
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-i386-cross git cmake make perl pkg-config clang libclang-dev",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev",
   "rm -rf /var/cache/apt/*"
 ]
 
@@ -24,7 +24,7 @@ passthrough = [
 [target.i686-unknown-linux-musl]
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-i386-cross git cmake make perl pkg-config clang libclang-dev",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev",
   "rm -rf /var/cache/apt/*"
 ]
 
@@ -38,7 +38,7 @@ passthrough = [
 [target.x86_64-unknown-linux-musl]
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-amd64-cross git cmake make perl pkg-config clang libclang-dev",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev",
   "rm -rf /var/cache/apt/*"
 ]
 
@@ -52,7 +52,7 @@ passthrough = [
 [target.armv7-unknown-linux-musleabihf]
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-armhf-cross git cmake make perl pkg-config clang libclang-dev",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev",
   "rm -rf /var/cache/apt/*"
 ]
 
@@ -66,7 +66,7 @@ passthrough = [
 [target.aarch64-unknown-linux-musl]
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-arm64-cross git cmake make perl pkg-config clang libclang-dev",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev",
   "rm -rf /var/cache/apt/*"
 ]
 
@@ -81,7 +81,7 @@ passthrough = [
 image = "ghcr.io/cross-rs/i686-pc-windows-gnu:main"
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-i386-cross git cmake make perl pkg-config clang libclang-dev nasm",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev nasm",
   "rm -rf /var/cache/apt/*"
 ]
 
@@ -96,7 +96,7 @@ passthrough = [
 image = "ghcr.io/cross-rs/x86_64-pc-windows-gnu:main"
 pre-build = [
   "apt-get update",
-  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests libc6-dev-amd64-cross git cmake make perl pkg-config clang libclang-dev nasm",
+  "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests git cmake make perl pkg-config clang libclang-dev nasm",
   "rm -rf /var/cache/apt/*"
 ]
 
