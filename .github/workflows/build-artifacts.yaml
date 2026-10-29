@@ -93,6 +93,13 @@ jobs:
       - name: Install cross
         run: cargo binstall --force -y cross
 
+      - name: Add some envs
+        run: |
+          if [[ "${{ matrix.target }}" == *-windows-gnu ]]; then
+            export BORING_BSSL_RUST_CPPLIB="static:-bundle=stdc++"
+            echo "BORING_BSSL_RUST_CPPLIB=$BORING_BSSL_RUST_CPPLIB" >> "$GITHUB_ENV"
+          fi
+
       - name: Build redlib
         run: |
           # cargo clean is because https://github.com/cross-rs/cross/issues/724
