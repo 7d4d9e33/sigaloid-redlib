@@ -96,7 +96,7 @@ jobs:
       - name: Add some envs
         run: |
           if [[ "${{ matrix.target }}" == *-windows-gnu ]]; then
-            export BORING_BSSL_RUST_CPPLIB="static=stdc++"
+            export BORING_BSSL_RUST_CPPLIB="static:-bundle=stdc++"
             echo "BORING_BSSL_RUST_CPPLIB=$BORING_BSSL_RUST_CPPLIB" >> "$GITHUB_ENV"
           fi
 
