@@ -36,7 +36,7 @@ RUN echo "finished building redlib!"
 FROM alpine:${ALPINE_VERSION} AS release
 
 # without gcc compat layer, redlib will crash with undefined symbols
-RUN apk add --update-cache --no-cache libgcc \
+RUN apk add --update-cache --no-cache libgcc libstdc++ \
     && rm -rf /var/cache/apk/*
 
 # Import redlib binary from builder
