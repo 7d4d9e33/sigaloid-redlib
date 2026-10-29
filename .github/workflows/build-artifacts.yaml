@@ -27,8 +27,8 @@ env:
   CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
   CARGO_TARGET_ARMV7_UNKNOWN_LINUX_MUSLEABIHF_RUSTFLAGS: "-C target-feature=+crt-static -C link-self-contained=yes"
-  CARGO_TARGET_I686_PC_WINDOWS_GNU_RUSTFLAGS: "-C target-feature=+crt-static -C link-arg=-static -C link-arg=-static-libstdc++  -C link-arg=-static-libgcc -C link-arg=-Wl,-Bstatic -C target-feature=+sse2"
-  CARGO_TARGET_X86_64_PC_WINDOWS_GNU_RUSTFLAGS: "-C target-feature=+crt-static -C link-arg=-static -C link-arg=-static-libstdc++ -C link-arg=-static-libgcc -C link-arg=-Wl,-Bstatic"
+  CARGO_TARGET_I686_PC_WINDOWS_GNU_RUSTFLAGS: "-C link-arg=-static -C link-arg=-static-libstdc++  -C link-arg=-static-libgcc -C target-feature=+sse2"
+  CARGO_TARGET_X86_64_PC_WINDOWS_GNU_RUSTFLAGS: "-C link-arg=-static -C link-arg=-static-libstdc++ -C link-arg=-static-libgcc"
 
   CFLAGS_i586_unknown_linux_musl: "-DOPENSSL_NO_ASM=ON"
   CXXFLAGS_i586_unknown_linux_musl: "-DOPENSSL_NO_ASM=ON"
@@ -95,8 +95,10 @@ jobs:
 
       - name: Add some envs
         run: |
-          export BINDGEN_EXTRA_CLANG_ARGS="--target=${{ matrix.target }}"
-          echo "BINDGEN_EXTRA_CLANG_ARGS=$BINDGEN_EXTRA_CLANG_ARGS" >> $GITHUB_ENV
+          if [[ "${{ matrix.target }}" == *-windows-gnu ]]; then
+            export BORING_BSSL_RUST_CPPLIB="static:-bundle=c++"
+            echo "BORING_BSSL_RUST_CPPLIB=$BORING_BSSL_RUST_CPPLIB" >> "$GITHUB_ENV"
+          fi
 
       - name: Build redlib
         run: |
