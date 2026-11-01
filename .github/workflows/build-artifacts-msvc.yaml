@@ -86,6 +86,7 @@ jobs:
         run: choco install nasm -y --no-progress
 
       - name: Add some envs
+        shell: pwsh
         run: |
           if [[ "${{ matrix.target }}" == "aarch64-pc-windows-msvc" ]]; then
             # BoringSSL currently does not currently support Windows arm64 assembly with MSVC.
@@ -94,7 +95,7 @@ jobs:
           fi
 
       - name: Build redlib
-        shell: bash
+        shell: pwsh
         run: |
           cargo clean
 
