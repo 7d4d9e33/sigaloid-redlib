@@ -105,15 +105,14 @@ jobs:
           where.exe clang-cl
           where.exe llvm-ar
 
-      - name: Test Clang ARM64
+      - name: Test Clang target architecture
         shell: pwsh
         run: |
           'int main() { return 0; }' | Out-File test.c -Encoding ascii
 
-          clang --target=aarch64-pc-windows-msvc `
-            -c test.c -o test.obj
+          clang --target=aarch64-pc-windows-msvc -c test.c -o test.obj
 
-          dumpbin /headers test.obj | Select-String machine
+          llvm-readobj --file-headers test.obj
 
       - name: Build redlib
         shell: bash
