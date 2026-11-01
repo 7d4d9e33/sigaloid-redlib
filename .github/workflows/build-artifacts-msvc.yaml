@@ -25,6 +25,11 @@ env:
 
   CMAKE_GENERATOR: Ninja
 
+  # BoringSSL currently does not currently support Windows arm64 assembly with MSVC.
+  # https://github.com/google/boringssl/blob/ed9209cff8b5a2fbc6c10050f29b3355048bda85/infra/config/main.star#L1814
+  CFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON"
+  CXXFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON"
+
 permissions:
   contents: read
 
@@ -95,11 +100,7 @@ jobs:
       - name: Add some envs
         shell: bash
         run: |
-          if [ "${{ matrix.target }}" == "aarch64-pc-windows-msvc" ]; then
-            # BoringSSL currently does not currently support Windows arm64 assembly with MSVC.
-            # https://github.com/google/boringssl/blob/ed9209cff8b5a2fbc6c10050f29b3355048bda85/infra/config/main.star#L1814
-            echo "OPENSSL_NO_ASM=1" >> "$GITHUB_ENV"
-          fi
+          true # we don't need to add anything here, for now.
 
       - name: Build redlib
         shell: bash
