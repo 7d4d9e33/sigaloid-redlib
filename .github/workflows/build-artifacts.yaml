@@ -130,3 +130,9 @@ jobs:
     needs: prepare
     with:
       skip-debug-build: ${{ inputs.skip-debug-build }}
+
+  build-msvc:
+    uses: ./.github/workflows/build-artifacts-msvc.yaml
+    needs: prepare
+    with:
+      skip-debug-build: ${{ inputs.skip-debug-build }}

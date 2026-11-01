@@ -1,0 +1,109 @@
+name: Build Artifact (Windows MSVC)
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip-debug-build:
+        type: boolean
+        default: false
+  workflow_call:
+    inputs:
+      skip-debug-build:
+        type: boolean
+        default: false
+
+env: 
+  RUST_BACKTRACE: full
+  CARGO_TERM_COLOR: always
+
+  CARGO_TARGET_I686_PC_WINDOWS_MSVC_RUSTFLAGS: "-C target-feature=+crt-static -C target-feature=+sse2"
+  CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS: "-C target-feature=+crt-static"
+  CARGO_TARGET_AARCH64_PC_WINDOWS_MSVC_RUSTFLAGS: "-C target-feature=+crt-static"
+
+  CFLAGS_i686_pc_windows_msvc: "-msse2"
+  CXXFLAGS_i686_pc_windows_msvc: "-msse2"
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    name: Prepare Build
+    runs-on: ubuntu-slim
+    permissions: {}
+    outputs:
+      build_profiles: ${{ steps.set-build-profile-matrix.outputs.BUILD_PROFILES }}
+    steps:
+      - id: set-build-profile-matrix
+        run: |
+          BUILD_PROFILES="[]"
+          BUILD_PROFILES=$(jq -c '. + ["release"]' <<< "$BUILD_PROFILES")
+          if [[ "${{ inputs.skip-debug-build }}" == "false" ]]; then
+            BUILD_PROFILES=$(jq -c '. + ["debug"]' <<< "$BUILD_PROFILES")
+          fi
+          jq 'if length == 0 then error("array is empty") else . end' <<< "$BUILD_PROFILES"
+          echo "BUILD_PROFILES=$BUILD_PROFILES" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: Build App
+    runs-on: ${{ matrix.runner }}
+    needs: prepare
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-pc-windows-msvc
+            runner: windows-2025
+
+          - target: i686-pc-windows-msvc
+            runner: windows-2025
+
+          - target: aarch64-pc-windows-msvc
+            runner: windows-11-arm
+        profile: ${{ fromJson(needs.prepare.outputs.build_profiles) }}
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Install Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v2
+        with:
+          toolchain: stable
+          cache: false
+          build-warnings: warn
+          target: ${{ matrix.target }}
+
+      - name: Install dependencies
+        run: |
+          winget install Kitware.CMake
+          winget install NASM.NASM
+          winget install LLVM.LLVM
+
+      - name: Add some envs
+        run: |
+          true # we don't need to add anything here, for now.
+
+      - name: Build redlib
+        shell: bash
+        run: |
+          cargo clean
+
+          if [ "${{ matrix.profile }}" = "release" ]; then
+            cargo build --release --target ${{ matrix.target }}
+          elif [ "${{ matrix.profile }}" = "debug" ]; then
+            cargo build --target ${{ matrix.target }}
+          else
+            echo "Unknown build profile! ${{ matrix.profile }}"
+            exit 1
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: redlib-${{ matrix.profile }}-${{ matrix.target }}
+          path: |
+            target/${{ matrix.target }}/release/redlib.exe
+            target/${{ matrix.target }}/debug/redlib.exe
+          compression-level: 9
+          if-no-files-found: error
