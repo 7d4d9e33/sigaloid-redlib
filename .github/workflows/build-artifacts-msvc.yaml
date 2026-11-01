@@ -75,10 +75,7 @@ jobs:
           target: ${{ matrix.target }}
 
       - name: Install dependencies
-        run: |
-          winget install Kitware.CMake
-          winget install NASM.NASM
-          winget install LLVM.LLVM
+        run: choco install cmake llvm nasm -y
 
       - name: Add some envs
         run: |
