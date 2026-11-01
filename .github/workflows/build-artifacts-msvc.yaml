@@ -108,6 +108,22 @@ jobs:
             exit 1
           fi
 
+      - name: diag1
+        shell: pwsh
+        if: always()
+        run: |
+          Select-String `
+            -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\crypto.vcxproj" `
+            -Pattern "aes-gcm-avx2-x86_64-apple"
+
+      - name: diag2
+        shell: pwsh
+        if: always()
+        run: |
+          Select-String `
+            -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\CMakeCache.txt" `
+            -Pattern "CMAKE_GENERATOR|CMAKE_SYSTEM_PROCESSOR|CMAKE_ASM_COMPILER"
+
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
