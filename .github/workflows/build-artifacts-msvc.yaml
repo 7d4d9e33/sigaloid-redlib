@@ -25,6 +25,8 @@ env:
 
   CMAKE_GENERATOR: Ninja
 
+  CMAKE_TOOLCHAIN_FILE_aarch64_pc_windows_msvc: ${{ github.workspace }}/.github/cmake/windows-arm64-msvc.cmake
+
 permissions:
   contents: read
 
