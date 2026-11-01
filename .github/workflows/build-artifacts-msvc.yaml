@@ -71,8 +71,8 @@ jobs:
           - target: i686-pc-windows-msvc
             runner: windows-2025
 
-          - target: aarch64-pc-windows-msvc
-            runner: windows-11-arm
+          # - target: aarch64-pc-windows-msvc
+          #   runner: windows-11-arm
 
     steps:
       - uses: actions/checkout@v7
