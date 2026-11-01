@@ -23,6 +23,8 @@ env:
   CFLAGS_i686_pc_windows_msvc: "-msse2"
   CXXFLAGS_i686_pc_windows_msvc: "-msse2"
 
+  CMAKE_GENERATOR: Ninja
+
 permissions:
   contents: read
 
@@ -81,7 +83,7 @@ jobs:
           target: ${{ matrix.target }}
 
       - name: Install dependencies
-        run: choco install cmake llvm nasm -y
+        run: choco install cmake llvm nasm ninja -y
 
       - name: Add some envs
         run: |
