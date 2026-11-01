@@ -23,6 +23,8 @@ env:
   CFLAGS_i686_pc_windows_msvc: "-msse2"
   CXXFLAGS_i686_pc_windows_msvc: "-msse2"
 
+  CMAKE_GENERATOR: Ninja
+
 permissions:
   contents: read
 
@@ -80,7 +82,7 @@ jobs:
           build-warnings: warn
           target: ${{ matrix.target }}
 
-        # current runner already have cmake and llvm and Chocolatey
+        # current runner already have cmake, llvm and ninja and Chocolatey
         # download speed is very slow so it should be skipped
       - name: Install dependencies
         run: choco install nasm -y --no-progress
