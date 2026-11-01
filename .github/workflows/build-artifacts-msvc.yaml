@@ -89,6 +89,15 @@ jobs:
         run: |
           true # we don't need to add anything here, for now.
 
+      - name: Check compiler architecture (diag)
+        shell: pwsh
+        run: |
+          rustc -vV
+          clang --version
+          clang++ --version
+          cmake --version
+          ninja --version
+
       - name: Build redlib
         shell: bash
         run: |
