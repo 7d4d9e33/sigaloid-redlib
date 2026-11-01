@@ -128,6 +128,35 @@ jobs:
             exit 1
           fi
 
+      - name: Inspect BoringSSL CMake configuration
+        if: always()
+        shell: pwsh
+        run: |
+          Get-ChildItem target -Recurse -Filter CMakeCache.txt |
+            Where-Object { $_.FullName -like '*btls-sys*' } |
+            ForEach-Object {
+              Write-Host "`n===== $($_.FullName) ====="
+
+              Select-String -Path $_.FullName -Pattern `
+                'CMAKE_GENERATOR:', `
+                'CMAKE_SYSTEM_PROCESSOR:', `
+                'CMAKE_C_COMPILER:', `
+                'CMAKE_C_COMPILER_TARGET:', `
+                'CMAKE_ASM_COMPILER:', `
+                'FIPS'
+            }
+
+      - name: Inspect FIPS build files
+        if: always()
+        shell: pwsh
+        run: |
+          Get-ChildItem target -Recurse -Filter build.ninja |
+            Where-Object { $_.FullName -like '*btls-sys*' } |
+            ForEach-Object {
+              Write-Host $_.FullName
+              Select-String -Path $_.FullName -Pattern 'aes-gcm-avx2-x86_64-win'
+            }
+
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
