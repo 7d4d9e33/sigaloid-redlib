@@ -1,10 +1,7 @@
-# Explicitly identify the target architecture.
 set(CMAKE_SYSTEM_NAME Windows)
-set(CMAKE_SYSTEM_PROCESSOR aarch64)
+set(CMAKE_SYSTEM_PROCESSOR ARM64)
 
-# Tell Clang which Windows target to generate.
-set(CMAKE_C_COMPILER_TARGET aarch64-pc-windows-msvc)
-set(CMAKE_CXX_COMPILER_TARGET aarch64-pc-windows-msvc)
-set(CMAKE_ASM_COMPILER_TARGET aarch64-pc-windows-msvc)
-
-message(STATUS "BoringSSL target processor: ${CMAKE_SYSTEM_PROCESSOR}")
+message(STATUS "===== ARM64 TOOLCHAIN ACTIVE =====")
+message(STATUS "CMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}")
+message(STATUS "CMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR}")
+message(STATUS "CMAKE_HOST_SYSTEM_PROCESSOR=${CMAKE_HOST_SYSTEM_PROCESSOR}")
