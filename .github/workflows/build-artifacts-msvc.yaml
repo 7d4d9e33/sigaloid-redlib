@@ -25,7 +25,7 @@ env:
 
   CMAKE_GENERATOR: Ninja
 
-  CMAKE_TOOLCHAIN_FILE_aarch64_pc_windows_msvc: ${{ github.workspace }}/.github/cmake/aarch64-pc-windows-msvc.cmake
+  # CMAKE_TOOLCHAIN_FILE_aarch64_pc_windows_msvc: ${{ github.workspace }}/.github/cmake/aarch64-pc-windows-msvc.cmake
 
 permissions:
   contents: read
@@ -86,9 +86,10 @@ jobs:
         run: choco install nasm -y --no-progress
 
       - name: Add some envs
-        shell: bash
         run: |
-          true # we don't need to add anything here, for now.
+          if [[ "${{ matrix.target }}" == *-windows-gnu ]]; then
+            echo "OPENSSL_NO_ASM=YES" >> "$GITHUB_ENV"
+          fi
 
       - name: Build redlib
         shell: bash
