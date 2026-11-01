@@ -130,6 +130,23 @@ jobs:
             exit 1
           fi
 
+      - name: inspect binary
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem target -Recurse -Filter build.ninja |
+              Where-Object { $_.FullName -like '*btls-sys*' }
+
+          foreach ($file in $files) {
+              $content = Get-Content $file.FullName -Raw
+
+              if ($content -match 'aes-gcm-avx2-x86_64-win') {
+                  Write-Error "Still selecting x86-64 FIPS assembly!"
+                  exit 1
+              }
+
+              Write-Host "No x86-64 FIPS assembly found."
+          }
+
       - name: Inspect BoringSSL CMake configuration
         if: always()
         shell: pwsh
