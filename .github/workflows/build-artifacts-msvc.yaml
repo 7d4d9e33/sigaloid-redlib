@@ -83,7 +83,7 @@ jobs:
           target: ${{ matrix.target }}
 
       - name: Install dependencies
-        run: choco install cmake llvm nasm ninja -y
+        run: choco install cmake nasm ninja -y
 
       - name: Add some envs
         run: |
