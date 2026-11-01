@@ -144,6 +144,14 @@ jobs:
             -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\CMakeCache.txt" `
             -Pattern "FIPS|OPENSSL_NO_ASM|CMAKE_ASM_COMPILER"
 
+      - name: diag4
+        shell: pwsh
+        if: always()
+        run: |
+          Select-String `
+            -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\CMakeCache.txt" `
+            -Pattern "FIPS_DELOCATE|OPENSSL_NO_ASM"
+
       - name: Inspect generated BoringSSL files
         if: always()
         shell: pwsh
