@@ -83,7 +83,7 @@ jobs:
           target: ${{ matrix.target }}
 
       - name: Install dependencies
-        run: choco install cmake nasm ninja -y
+        run: choco install cmake llvm nasm ninja -y
 
       - name: Add some envs
         run: |
@@ -101,7 +101,19 @@ jobs:
       - name: diag2
         shell: pwsh
         run: |
-          clang --target=aarch64-pc-windows-msvc --version
+          where.exe clang
+          where.exe clang-cl
+          where.exe llvm-ar
+
+      - name: Test Clang ARM64
+        shell: pwsh
+        run: |
+          'int main() { return 0; }' | Out-File test.c -Encoding ascii
+
+          clang --target=aarch64-pc-windows-msvc `
+            -c test.c -o test.obj
+
+          dumpbin /headers test.obj | Select-String machine
 
       - name: Build redlib
         shell: bash
