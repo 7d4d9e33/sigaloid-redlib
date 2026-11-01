@@ -124,3 +124,9 @@ jobs:
             target/${{ matrix.target }}/debug/redlib.exe
           compression-level: 9
           if-no-files-found: error
+
+  build-macos:
+    uses: ./.github/workflows/build-artifacts-macos.yaml
+    needs: prepare
+    with:
+      skip-debug-build: ${{ inputs.skip-debug-build }}
