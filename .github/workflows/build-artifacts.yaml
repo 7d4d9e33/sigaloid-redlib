@@ -68,11 +68,11 @@ jobs:
       matrix:
         target:
           # - i586-unknown-linux-musl
-          - i686-unknown-linux-musl
+          # - i686-unknown-linux-musl
           - x86_64-unknown-linux-musl
-          - aarch64-unknown-linux-musl
-          - armv7-unknown-linux-musleabihf
-          - x86_64-pc-windows-gnu
+          # - aarch64-unknown-linux-musl
+          # - armv7-unknown-linux-musleabihf
+          # - x86_64-pc-windows-gnu
           # - i686-pc-windows-gnu
         profile: ${{ fromJson(needs.prepare.outputs.build_profiles) }}
     steps:
@@ -125,11 +125,11 @@ jobs:
           compression-level: 9
           if-no-files-found: error
 
-  build-macos:
-    uses: ./.github/workflows/build-artifacts-macos.yaml
-    needs: prepare
-    with:
-      skip-debug-build: ${{ inputs.skip-debug-build }}
+  # build-macos:
+  #   uses: ./.github/workflows/build-artifacts-macos.yaml
+  #   needs: prepare
+  #   with:
+  #     skip-debug-build: ${{ inputs.skip-debug-build }}
 
   build-msvc:
     uses: ./.github/workflows/build-artifacts-msvc.yaml
