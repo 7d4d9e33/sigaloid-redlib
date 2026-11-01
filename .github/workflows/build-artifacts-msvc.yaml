@@ -88,7 +88,7 @@ jobs:
       - name: Add some envs
         shell: pwsh
         run: |
-          if [[ "${{ matrix.target }}" == "aarch64-pc-windows-msvc" ]]; then
+          if [ "${{ matrix.target }}" == "aarch64-pc-windows-msvc" ]; then
             # BoringSSL currently does not currently support Windows arm64 assembly with MSVC.
             # https://github.com/google/boringssl/blob/ed9209cff8b5a2fbc6c10050f29b3355048bda85/infra/config/main.star#L1814
             echo "OPENSSL_NO_ASM=1" >> "$GITHUB_ENV"
