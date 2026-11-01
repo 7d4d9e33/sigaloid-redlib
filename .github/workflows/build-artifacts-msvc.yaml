@@ -80,8 +80,8 @@ jobs:
           build-warnings: warn
           target: ${{ matrix.target }}
 
-        # current runner already have cmake and llvm and chocolatey is very slow
-        # so it should be skipped
+        # current runner already have cmake and llvm and Chocolatey
+        # download speed is very slow so it should be skipped
       - name: Install dependencies
         run: choco install nasm -y --no-progress
 
