@@ -87,6 +87,11 @@ jobs:
       - name: Install dependencies
         run: choco install nasm -y --no-progress
 
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.31.8' # mainly to workaround arm64 build failure
+
       - name: Add some envs
         shell: bash
         run: |
