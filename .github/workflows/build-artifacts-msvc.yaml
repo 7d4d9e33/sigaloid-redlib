@@ -98,6 +98,11 @@ jobs:
           cmake --version
           ninja --version
 
+      - name: diag2
+        shell: pwsh
+        run: |
+          clang --target=aarch64-pc-windows-msvc --version
+
       - name: Build redlib
         shell: bash
         run: |
