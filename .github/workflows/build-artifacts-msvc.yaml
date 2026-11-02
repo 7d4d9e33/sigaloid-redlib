@@ -23,8 +23,8 @@ env:
   CFLAGS_i686_pc_windows_msvc: "-msse2"
   CXXFLAGS_i686_pc_windows_msvc: "-msse2"
 
-  CFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON -DCMAKE_POLICY_DEFAULT_CMP0194=NEW"
-  CXXFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON -DCMAKE_POLICY_DEFAULT_CMP0194=NEW"
+  CFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON"
+  CXXFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON"
 
   CMAKE_GENERATOR: Ninja
 
@@ -68,7 +68,7 @@ jobs:
           - target: i686-pc-windows-msvc
             runner: windows-2025
           - target: aarch64-pc-windows-msvc
-            runner: windows-11-arm
+            runner: windows-2025
 
     steps:
       - uses: actions/checkout@v7
