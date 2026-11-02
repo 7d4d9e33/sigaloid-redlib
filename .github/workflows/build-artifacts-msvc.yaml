@@ -23,6 +23,9 @@ env:
   CFLAGS_i686_pc_windows_msvc: "-msse2"
   CXXFLAGS_i686_pc_windows_msvc: "-msse2"
 
+  CFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON -DCMAKE_POLICY_DEFAULT_CMP0194=NEW"
+  CXXFLAGS_aarch64_pc_windows_msvc: "-DOPENSSL_NO_ASM=ON -CMAKE_POLICY_DEFAULT_CMP0194=NEW"
+
   CMAKE_GENERATOR: Ninja
 
   # CMAKE_TOOLCHAIN_FILE_aarch64_pc_windows_msvc: ${{ github.workspace }}/.github/cmake/aarch64-pc-windows-msvc.cmake
