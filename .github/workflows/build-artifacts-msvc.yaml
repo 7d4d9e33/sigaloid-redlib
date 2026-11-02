@@ -95,10 +95,7 @@ jobs:
       - name: Add some envs
         shell: bash
         run: |
-          if [ "${{ matrix.target }}" == "aarch64-pc-windows-msvc" ]; then
-            echo "OPENSSL_NO_ASM=ON" >> "$GITHUB_ENV"
-            echo "CMAKE_POLICY_DEFAULT_CMP0194=NEW" >> "$GITHUB_ENV"
-          fi
+          true # we don't do anything here, for now.
 
       - name: Build redlib
         shell: bash
