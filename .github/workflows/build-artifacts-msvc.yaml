@@ -92,7 +92,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ matrix.target }}" == "aarch64-pc-windows-msvc" ]; then
-            echo "OPENSSL_NO_ASM=YES" >> "$GITHUB_ENV"
+            echo "OPENSSL_NO_ASM=ON" >> "$GITHUB_ENV"
           fi
 
       - name: Build redlib
