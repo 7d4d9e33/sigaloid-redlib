@@ -85,7 +85,7 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: |
-          if [[] "${{ matrix.target }}" == x86_64-*-windows-msvc || "${{ matrix.target }}" == i686-*-windows-msvc ]]; then
+          if [[ "${{ matrix.target }}" == x86_64-*-windows-msvc || "${{ matrix.target }}" == i686-*-windows-msvc ]]; then
             choco install nasm -y --no-progress
           fi
 
