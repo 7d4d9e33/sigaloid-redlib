@@ -83,6 +83,7 @@ jobs:
         # current runner already have cmake, llvm and ninja and Chocolatey
         # download speed is very slow so it should be skipped
       - name: Install dependencies
+        shell: bash
         run: |
           if [ "${{ runner.arch }}" == x86_64-*-windows-msvc || "${{ matrix.target }}" == i686-*-windows-msvc ]; then
             choco install nasm -y --no-progress
