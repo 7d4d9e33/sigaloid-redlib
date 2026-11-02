@@ -106,59 +106,6 @@ jobs:
             exit 1
           fi
 
-      - name: diag1
-        shell: pwsh
-        if: always()
-        run: |
-          Select-String `
-            -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\crypto.vcxproj" `
-            -Pattern "aes-gcm-avx2-x86_64-apple"
-
-      - name: diag2
-        shell: pwsh
-        if: always()
-        run: |
-          Select-String `
-            -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\CMakeCache.txt" `
-            -Pattern "CMAKE_GENERATOR|CMAKE_SYSTEM_PROCESSOR|CMAKE_ASM_COMPILER"
-
-      - name: diag3
-        shell: pwsh
-        if: always()
-        run: |
-          rustc -vV
-          echo -----
-          cargo tree -e features -i btls-sys
-          echo -----
-          Select-String `
-            -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\CMakeCache.txt" `
-            -Pattern "FIPS|OPENSSL_NO_ASM|CMAKE_ASM_COMPILER"
-
-      - name: diag4
-        shell: pwsh
-        if: always()
-        run: |
-          Select-String `
-            -Path "target\${{ matrix.target }}\${{ matrix.profile }}\build\btls-sys-*\out\build\CMakeCache.txt" `
-            -Pattern "FIPS_DELOCATE|OPENSSL_NO_ASM"
-
-      - name: Inspect generated BoringSSL files
-        if: always()
-        shell: pwsh
-        run: |
-          $file = Get-ChildItem target -Recurse -Filter CMakeLists.txt |
-            Where-Object { $_.FullName -match 'btls-sys.*out\\boringssl' } |
-            Select-Object -First 1
-
-          if ($file) {
-            $lines = Get-Content $file.FullName
-            for ($i = 350; $i -lt [Math]::Min(400, $lines.Length); $i++) {
-              Write-Host "$($i + 1): $($lines[$i])"
-            }
-          } else {
-            Write-Host "BoringSSL source not found"
-          }
-
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
