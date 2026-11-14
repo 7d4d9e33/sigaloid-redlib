@@ -40,7 +40,7 @@ jobs:
 
       - id: test
         name: Run cargo nextest
-        run: cargo nextest run
+        run: cargo nextest run --no-fail-fast
 
   conclusion:
     name: Conclude run
