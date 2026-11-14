@@ -1,6 +1,7 @@
 name: Test
 
 env:
+  RUST_BACKTRACE: off
   CARGO_TERM_COLOR: always
   NEXTEST_RETRIES: 10
 
